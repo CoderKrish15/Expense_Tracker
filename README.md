@@ -1,0 +1,1 @@
+Expense Tracker is a simple, elegant, and user-friendly website built with Django that allows users to manage and track their daily expenses efficiently. Users can add, edit, and delete expenses and view their total expenditure. The website also provides a PDF report feature for generating printable records.
