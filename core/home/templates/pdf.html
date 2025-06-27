@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f1f4f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .report-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 750px;
+      margin: 30px auto;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .header h4 {
+      font-size: 24px;
+      color: #333;
+      margin: 0;
+    }
+
+    .expense-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .expense-table th {
+      background-color: #343a40;
+      color: #fff;
+      padding: 12px;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    .expense-table td {
+      padding: 12px;
+      border-bottom: 1px solid #dee2e6;
+      font-size: 15px;
+    }
+
+    .expense-total {
+      font-size: 18px;
+      font-weight: 600;
+      color: #155724;
+      margin-top: 25px;
+      background-color: #d4edda;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    .expense-footer {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .btn-print {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .btn-print button {
+      background-color: #28a745;
+      border: none;
+      color: #fff;
+      padding: 10px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-print button:hover {
+      background-color: #218838;
+    }
+
+    @media print {
+      .btn-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="report-container">
+    <div class="header">
+      <img src="{% static 'home/expense_tracker.png' %}" alt="logo" class="logo-img">
+      <h4>{{ username }}, Your Finance Record</h4>
+    </div>
+
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>Expenses Reason</th>
+          <th>Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.name }}</td>
+          <td>₹{{ expense.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="expense-total">
+      Total Expenses: ₹{{ total_sum }}
+    </div>
+
+    <div class="expense-footer">
+      Dear {{ username }}, your total recorded expenses are ₹{{ total_sum }}.
+    </div>
+
+    <div class="btn-print">
+      <button onclick="window.print()">Print PDF</button>
+    </div>
+  </div>
+
+</body>
+
+</html>

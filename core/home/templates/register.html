@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(to right, #7ddfce, #93b7e3);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-control {
+            background-color: #eaf1ff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .btn-purple {
+            background-color: #5e60ce;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .btn-purple:hover {
+            background-color: #4b52b3;
+        }
+
+        .form-link a {
+            color: #5e60ce;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success {{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <h3 class="text-center mb-4">Register</h3>
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-purple">Register</button>
+            </div>
+
+            <p class="text-center mt-3 form-link">
+                Already have an account?
+                <a href="{% url 'login' %}">Log in here</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+
+</html>
